@@ -1,42 +1,369 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  background: radial-gradient(circle at 20% 10%, rgba(22, 163, 74, 0.15), transparent 50%), radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.12), transparent 50%),
+    linear-gradient(135deg, var(--bg-gradient-from) 0%, var(--bg-gradient-to) 100%);
+  background-attachment: fixed;
+  color: var(--text-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+.app-container {
+  max-width: 70vw;
+  /* max-width: 850px; */
+  margin: 0 auto;
+  padding: 48px 20px 60px;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* HERO SECTION */
+.hero {
+  margin-bottom: 32px;
+  animation: fadeInUp 0.6s ease-out;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.heroBadgeWrapper {
+  margin-bottom: 16px;
+}
+
+.heroBadge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--badge-border);
+  background: var(--badge-bg);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4);
+  animation: badgePulseAnimation 2s infinite;
+}
+
+@keyframes badgePulseAnimation {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(22, 163, 74, 0);
+  }
+}
+
+.badgePulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+.heroTitle {
+  font-size: clamp(32px, 5vw, 42px);
+  line-height: 1.15;
+  margin-bottom: 12px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.heroTitleAccent {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-gradient) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.heroSubtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted-text);
+  max-width: 480px;
+  font-weight: 400;
+}
+
+/* SEARCH SECTION */
+.searchSection {
+  margin-bottom: 28px;
+  animation: fadeInUp 0.6s ease-out 0.1s both;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+/* GEOLOCATION BUTTON */
+.geoButton {
+  padding: 11px 20px;
+  border-radius: 12px;
+  border: 1.5px solid var(--accent);
+  background: var(--geobutton-bg);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px var(--geobutton-shadow);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.geoButton::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.geoButton:hover::before {
+  left: 100%;
+}
+
+.geoButton:hover {
+  background: var(--accent);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--geobutton-hover-shadow);
+  border-color: var(--accent);
+}
+
+.geoButton:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px var(--geobutton-shadow);
+}
+
+.geoButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.geoIcon {
+  transition: transform 0.2s ease;
+}
+
+.geoButton:hover .geoIcon {
+  transform: scale(1.1);
+}
+
+/* EMPTY STATE */
+.emptyState {
+  margin-top: 24px;
+  margin-bottom: 28px;
+  padding: 40px 32px;
+  border-radius: 20px;
+  background: var(--empty-bg);
+  border: 1.5px dashed var(--empty-border);
+  box-shadow: var(--shadow-soft);
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.emptyState::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(22, 163, 74, 0.03) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.emptyIconWrapper {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 16px;
+}
+
+.emptyIcon {
+  display: inline-flex;
+  padding: 16px;
+  border-radius: 16px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.emptyTitle {
+  position: relative;
+  z-index: 1;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-color);
+  letter-spacing: -0.01em;
+}
+
+.emptyText {
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--muted-text);
+  max-width: 440px;
+  margin: 0 auto;
+}
+
+.emptyHighlight {
+  color: var(--accent);
+  font-weight: 600;
+  padding: 2px 6px;
+  background: var(--accent-soft);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.emptyHighlight:hover {
+  transform: scale(1.05);
+  background: var(--accent);
+  color: white;
+}
+
+/* WEATHER CONTENT */
+.weatherContent {
+  animation: fadeInUp 0.6s ease-out 0.3s both;
+}
+
+/* THEME VARIABLES */
+:root {
+  --bg-color: #f3f7f4;
+  --bg-gradient-from: #f8faf9;
+  --bg-gradient-to: #edf5f0;
+  --text-color: #0f172a;
+  --muted-text: #64748b;
+  --accent: #16a34a;
+  --accent-gradient: #15803d;
+  --accent-hover: #15803d;
+  --accent-soft: #dcfce7;
+  --card-bg: #ffffff;
+  --card-border: #e2f3e7;
+  --shadow-soft: 0 8px 32px rgba(22, 163, 74, 0.06);
+  --badge-bg: rgba(240, 253, 244, 0.95);
+  --badge-border: rgba(34, 197, 94, 0.3);
+  --geobutton-bg: rgba(255, 255, 255, 0.9);
+  --geobutton-shadow: rgba(22, 163, 74, 0.15);
+  --geobutton-hover-shadow: rgba(22, 163, 74, 0.3);
+  --empty-bg: rgba(255, 255, 255, 0.7);
+  --empty-border: rgba(34, 197, 94, 0.25);
+}
+
+[data-theme="dark"] {
+  --bg-color: #020617;
+  --bg-gradient-from: #0a0f1a;
+  --bg-gradient-to: #020617;
+  --text-color: #e5fbe9;
+  --muted-text: #94a3b8;
+  --accent: #22c55e;
+  --accent-gradient: #10b981;
+  --accent-hover: #16a34a;
+  --accent-soft: rgba(34, 197, 94, 0.15);
+  --card-bg: rgba(15, 23, 42, 0.6);
+  --card-border: rgba(34, 197, 94, 0.2);
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.5);
+  --badge-bg: rgba(34, 197, 94, 0.1);
+  --badge-border: rgba(34, 197, 94, 0.3);
+  --geobutton-bg: rgba(15, 23, 42, 0.8);
+  --geobutton-shadow: rgba(34, 197, 94, 0.2);
+  --geobutton-hover-shadow: rgba(34, 197, 94, 0.4);
+  --empty-bg: rgba(15, 23, 42, 0.4);
+  --empty-border: rgba(34, 197, 94, 0.3);
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .app-container {
+    padding: 32px 16px 48px;
+  }
+
+  .heroTitle {
+    font-size: 28px;
+  }
+
+  .heroSubtitle {
+    font-size: 14px;
+  }
+
+  .controlsRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .geoButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .emptyState {
+    padding: 32px 24px;
   }
 }

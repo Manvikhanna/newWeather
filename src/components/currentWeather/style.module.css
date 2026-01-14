@@ -1,0 +1,261 @@
+.weatherCard {
+  position: relative;
+  padding: 24px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  overflow: hidden;
+
+  background: linear-gradient(135deg, var(--dark-card) 0%, #0f3a2f 100%);
+
+  border: 2px solid var(--accent);
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.15), 0 0 40px rgba(16, 185, 129, 0.05);
+}
+
+.weatherCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(110, 231, 183, 0.03) 100%);
+}
+
+/* ───────────────── Badge ───────────────── */
+
+.premiumBadge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 2;
+
+  padding: 6px 12px;
+  border-radius: 20px;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+
+  background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+}
+
+/* ───────────────── Header ───────────────── */
+
+.headerRow {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.cityName {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+
+  background: linear-gradient(135deg, var(--text-primary), var(--green-light));
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.condition {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.conditionIcon {
+  font-size: 18px;
+  color: var(--green-light);
+}
+
+.gradientAccent {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  opacity: 0.15;
+
+  background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+}
+
+/* ───────────────── Main Section ───────────────── */
+
+.mainRow {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  margin: 20px 0;
+}
+
+.iconContainer {
+  width: 100px;
+  height: 100px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+  border: 2px solid rgba(16, 185, 129, 0.2);
+
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(16, 185, 129, 0.03) 100%);
+}
+
+.weatherIcon {
+  width: 80px;
+  height: 80px;
+  filter: drop-shadow(0 4px 12px rgba(16, 185, 129, 0.25));
+}
+
+.tempBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.temperature {
+  margin: 0;
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text-primary);
+}
+
+.feelsLike {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* ───────────────── Details ───────────────── */
+
+.weatherDetails {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  margin-top: 20px;
+  padding-top: 20px;
+
+  border-top: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.detailItem {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detailIconWrapper {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+
+  background: rgba(16, 185, 129, 0.15);
+}
+
+.detailIcon {
+  font-size: 24px;
+  color: var(--green-primary);
+}
+
+.detailLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.detailValue {
+  margin-top: 2px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--green-light);
+}
+
+.divider {
+  width: 1px;
+  background: rgba(16, 185, 129, 0.2);
+}
+
+/* ───────────────── Responsive ───────────────── */
+
+/* Mobile */
+@media (max-width: 640px) {
+  .weatherCard {
+    padding: 20px;
+  }
+
+  .headerRow {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cityName {
+    font-size: 22px;
+  }
+
+  .mainRow {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .temperature {
+    font-size: 40px;
+  }
+
+  .weatherDetails {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .divider {
+    display: none;
+  }
+}
+
+/* Tablet */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .temperature {
+    font-size: 44px;
+  }
+
+  .iconContainer {
+    width: 90px;
+    height: 90px;
+  }
+
+  .weatherIcon {
+    width: 72px;
+    height: 72px;
+  }
+}
